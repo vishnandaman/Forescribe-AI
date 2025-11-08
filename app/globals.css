@@ -1,0 +1,110 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600&family=Plus+Jakarta+Sans:wght@400&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-bg: #0b0b0d;
+  --color-surface: #151517;
+  --color-card: #1e1e1e;
+  --color-accent-start: #3b82f6;
+  --color-accent-mid: #6366f1;
+  --color-accent-end: #8b5cf6;
+  --color-text: #e5e7eb;
+  --color-muted: #9ca3af;
+  --color-google: #8b3dff;
+  --color-microsoft: #4a4a4a;
+}
+
+@layer base {
+  * {
+    @apply border-gray-800;
+  }
+  
+  body {
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@layer components {
+  .container {
+    max-width: 1280px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0 1rem;
+  }
+  
+  .gradient-text {
+    background: linear-gradient(135deg, var(--color-accent-start), var(--color-accent-mid), var(--color-accent-end));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
+  .gradient-bg {
+    background: linear-gradient(135deg, var(--color-accent-start), var(--color-accent-mid), var(--color-accent-end));
+  }
+  
+  .card-hover {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+  }
+  
+  .card-hover:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 20px 40px rgba(99, 102, 241, 0.3), 0 0 0 1px rgba(139, 61, 255, 0.1);
+  }
+  
+  .card-hover::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(135deg, rgba(139, 61, 255, 0.3), rgba(99, 102, 241, 0.1));
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  
+  .card-hover:hover::before {
+    opacity: 1;
+  }
+  
+  .glow-effect {
+    box-shadow: 0 0 20px rgba(139, 61, 255, 0.3), 0 0 40px rgba(139, 61, 255, 0.1);
+  }
+  
+  .glass-effect {
+    background: rgba(30, 30, 30, 0.7);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  
+  .shadow-glow {
+    box-shadow: 0 0 30px rgba(139, 61, 255, 0.4);
+  }
+  
+  .shadow-glow-lg {
+    box-shadow: 0 0 60px rgba(139, 61, 255, 0.3);
+  }
+}
+
