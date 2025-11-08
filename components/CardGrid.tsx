@@ -21,6 +21,41 @@ export default function CardGrid({
   className = '',
   gridClassName = '',
 }: CardGridProps) {
+  const baseContainerWidth = 1901.95
+  const baseCardWidth = 374.04
+  const baseCardHeight = 543.12
+  const baseGap = 7.94
+  const baseCardGap = 2.5
+  const baseOffset = 221
+
+  const [scale, setScale] = useState(1)
+  
+  useEffect(() => {
+    if (variant === 'overlay') return
+    
+    const updateScale = () => {
+      const container = document.getElementById('cards-container')
+      if (container) {
+        const containerWidth = container.offsetWidth
+        const scaleFactor = containerWidth / baseContainerWidth
+        setScale(Math.min(scaleFactor, 1))
+      }
+    }
+
+    updateScale()
+    window.addEventListener('resize', updateScale)
+    const observer = new ResizeObserver(updateScale)
+    const container = document.getElementById('cards-container')
+    if (container) {
+      observer.observe(container)
+    }
+
+    return () => {
+      window.removeEventListener('resize', updateScale)
+      observer.disconnect()
+    }
+  }, [baseContainerWidth, variant])
+
   const wrapperBase = withContainer ? '' : ''
   const spacing = variant === 'default' ? '' : ''
   const wrapperClasses = [spacing, wrapperBase, className].filter(Boolean).join(' ')
@@ -91,39 +126,6 @@ export default function CardGrid({
   const column3Cards = cards.slice(7, 11)
   const column4Cards = cards.slice(11, 14)
   const column5Cards = cards.slice(14, 18)
-
-  const baseContainerWidth = 1901.95
-  const baseCardWidth = 374.04
-  const baseCardHeight = 543.12
-  const baseGap = 7.94
-  const baseCardGap = 2.5
-  const baseOffset = 221
-
-  const [scale, setScale] = useState(1)
-  
-  useEffect(() => {
-    const updateScale = () => {
-      const container = document.getElementById('cards-container')
-      if (container) {
-        const containerWidth = container.offsetWidth
-        const scaleFactor = containerWidth / baseContainerWidth
-        setScale(Math.min(scaleFactor, 1))
-      }
-    }
-
-    updateScale()
-    window.addEventListener('resize', updateScale)
-    const observer = new ResizeObserver(updateScale)
-    const container = document.getElementById('cards-container')
-    if (container) {
-      observer.observe(container)
-    }
-
-    return () => {
-      window.removeEventListener('resize', updateScale)
-      observer.disconnect()
-    }
-  }, [baseContainerWidth])
 
   return (
     <div className={wrapperClasses} style={{ width: '100%', height: '100%', position: 'relative' }}>

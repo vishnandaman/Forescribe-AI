@@ -187,7 +187,7 @@ export default function WelcomeModal({
             padding: `0 ${8 * scale}px`,
           }}
         >
-          By clicking "Continue with Google/Microsoft" above, you acknowledge that you have read and understood, and agree to Forescribe's{' '}
+          By clicking &quot;Continue with Google/Microsoft&quot; above, you acknowledge that you have read and understood, and agree to Forescribe&apos;s{' '}
           <a href="#" className="text-[#A78BFA] hover:underline font-normal">
             Terms & Conditions
           </a>{' '}
